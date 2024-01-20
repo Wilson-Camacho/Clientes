@@ -45,7 +45,7 @@ namespace Clientes.Models
         public string? Genero { get; set; }
         
         [Column("UrlGenerado")]
-        public string UrlGenerado { get; set; }
+        public string? UrlGenerado { get; set; }
 
         public ClienteInteres? ClienteInteres { get; set; }
     }
