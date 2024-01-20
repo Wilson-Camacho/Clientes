@@ -1,0 +1,77 @@
+﻿@model IEnumerable<Cliente>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Clientes</title>
+</head>
+<body>
+
+    <h2>Lista de Clientes</h2>
+    <a asp-controller="Home" asp-action="CreateCustomer" class="btn btn-warning"><i class="bi bi-person-plus"></i> Añadir cliente</a>
+    <br />
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Telefono</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            @foreach (var cliente in ViewBag.Items)
+            {
+                <tr>
+                    <td>@cliente.Nombre</td>
+                    <td>@cliente.Email</td>
+                    <td>@cliente.Telefono</td>
+                    <td>
+                        <a class="btn btn-primary" asp-controller="Home" asp-action="UpdateCustomer" asp-route-idCliente="@cliente.IdCliente"><i class="bi bi-pencil"></i></a>
+                        <a class="btn btn-primary" asp-controller="Home" asp-action="NewSettingsCustomer" asp-route-idCliente="@cliente.IdCliente"><i class="bi bi-envelope-plus-fill"></i></a>
+                        <button id="btnEliminar" onclick='eliminarContacto(@cliente.IdCliente, "@cliente.Nombre")' class="btn btn-primary"><i class="bi bi-person-x-fill"></i></button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            @if (ViewBag.CurrentPage > 1)
+            {
+                <li class="page-item">
+                    @Html.ActionLink("<< Anterior", "Index", new { page = ViewBag.CurrentPage - 1 }, new { @class = "page-link" })
+                </li>
+            }
+
+            @for (int i = 1; i <= ViewBag.TotalPages; i++)
+            {
+                <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+                    @Html.ActionLink(i.ToString(), "Index", new { page = i }, new { @class = "page-link" })
+                </li>
+            }
+
+            @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+            {
+                <li class="page-item">
+                    @Html.ActionLink("Siguiente >>", "Index", new { page = ViewBag.CurrentPage + 1 }, new { @class = "page-link" })
+                </li>
+            }
+        </ul>
+    </nav>
+
+    <script>
+        function eliminarContacto(IdCliente, nombreCliente) {
+
+            console.log(IdCliente, nombreCliente);
+
+            const confirmacion = window.confirm(`¿Estás seguro de que deseas eliminar al cliente: ${nombreCliente}?`);
+
+            if (confirmacion) {
+                window.location.href += `Home/DeleteCustomer?idCliente=${IdCliente}`;
+            }
+        }
+    </script>
+</body>
+</html>

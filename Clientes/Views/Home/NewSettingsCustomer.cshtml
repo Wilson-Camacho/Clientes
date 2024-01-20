@@ -1,0 +1,50 @@
+﻿@model ClienteInteres
+
+@{
+    ViewData["Title"] = "NewSettingsCustomer";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2 class="mb-4">Modificación cliente: @Model.Cliente.Nombre</h2>
+            <form asp-action="NewSettingsCustomer" asp-controller="Home" method="post">
+
+                <input asp-for="Cliente.IdCliente" type="hidden" class="form-control">
+
+                <div class="form-group">
+                    <label for="email">Nombre de la empresa:</label>
+                    <input asp-for="Cliente.NombreEmpresa" type="text" class="form-control" placeholder="Nombre de la empresa">
+                </div>
+
+                <br />
+                <div class="form-group">
+                    <label for="seleccionInteres">Si lo desea, seleccionar los intereses:</label>
+                    <select class="form-select" asp-for="SelectedOptions" asp-items="@(new SelectList(Model.Intereses, nameof(Interes.IdInteres), nameof(Interes.Descripcion)))" multiple="multiple"></select>
+                </div>
+                <br />
+
+                <div class="form-group">
+                    <label for="cuentaTwitter">Cuenta de twitter</label>
+                    <input asp-for="Cliente.CuentaTwitter" type="text" class="form-control" placeholder="Cuenta de twitter">
+                </div>
+
+                <label for="genero">Genero:</label>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" asp-for="Cliente.Genero" value="Masculino">
+                    <label class="form-check-label" for="opcionA">Masculino</label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" asp-for="Cliente.Genero" value="Femenino">
+                    <label class="form-check-label" for="opcionB">Femenino</label>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <a asp-controller="Home" asp-action="Index" class="btn btn-warning">Volver a la lista</a>
+            </form>
+        </div>
+    </div>
+</div>
+
