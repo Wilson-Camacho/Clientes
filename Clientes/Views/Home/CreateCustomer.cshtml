@@ -58,14 +58,22 @@
                     var documentoIdentificacion = document.getElementById('idDocumento').value;
                     console.log(documentoIdentificacion);
                     
-                    var regexDNI = /^[XYZ]?\d{7,8}[A-Z]$/i;    
+                    var regexDNI = /^[XYZ]?\d{7,8}[A-Z]$/i;
                     var dniValue = documentoIdentificacion.trim().toUpperCase();
+
 
                     if (!regexDNI.test(dniValue)) {
                         alert('Por favor introduce un DNI/NIE autentico');
                         event.preventDefault(); 
                     }
+                    
+                    var numeroTelefono = document.getElementById('Idtelefono').value;
+                    var regex = /^\d{10}$/;
 
+                    if (!regex.test(numeroTelefono)) {
+                        alert('Por favor introduce un número de telefono valido');
+                        event.preventDefault();
+                    }
                 });
             </script>
         </div>

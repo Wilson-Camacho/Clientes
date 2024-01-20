@@ -62,14 +62,16 @@
     </nav>
 
     <script>
-        function eliminarContacto(IdCliente, nombreCliente) {
+        async function eliminarContacto(IdCliente, nombreCliente) {
 
             console.log(IdCliente, nombreCliente);
 
-            const confirmacion = window.confirm(`¿Estás seguro de que deseas eliminar al cliente: ${nombreCliente}?`);
+            var confirmacion = window.confirm(`¿Estás seguro de que deseas eliminar al cliente: ${nombreCliente}?`);
 
             if (confirmacion) {
-                window.location.href += `Home/DeleteCustomer?idCliente=${IdCliente}`;
+                console.log("pasa por aqui")
+
+                window.location.href = window.location.origin + `/Home/DeleteCustomer?idCliente=${IdCliente}`;
             }
         }
     </script>

@@ -117,14 +117,16 @@ namespace Clientes.Interface
             return cliente;
         }
 
-        public async Task<bool> DeleteCustomer(int IdCliente)
+        public async void DeleteCustomer(int IdCliente)
         {
             var db = dbConnection();
             await db.OpenAsync();
+            
+            var queryExpression = $"DELETE FROM clientes_interes WHERE idCliente = {IdCliente}";
+            db.ExecuteAsync(queryExpression, new { Id = IdCliente });
 
-            var queryExpression = $"DELETE FROM clientes WHERE idCliente = {IdCliente}";
-
-            return await db.ExecuteAsync(queryExpression, new { Id = IdCliente }) > 0;
+            queryExpression = $"DELETE FROM clientes WHERE idCliente = {IdCliente}";
+            db.ExecuteAsync(queryExpression, new { Id = IdCliente });
         }
 
         public async Task<ClienteInteres> ViewInterests(int IdCliente)

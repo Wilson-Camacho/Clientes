@@ -7,7 +7,7 @@
     <div class="row justify-content-center">
         <div class="col-md-6">
             <h2 class="mb-4">Modificación cliente: </h2>
-            <form asp-action="UpdateCustomer" asp-controller="Home" method="post">
+            <form id="formularioCreacion" asp-action="UpdateCustomer" asp-controller="Home" method="post">
 
                 <input asp-for="IdCliente" type="hidden" class="form-control">
 
@@ -50,8 +50,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="email">Apellido:</label>
-                    <input asp-for="DocumentoIdentificacion" type="text" class="form-control" placeholder="Ingresar DNI/NIE">
+                    <label for="documentoIdentidad">Documento DNI/NIE:</label>
+                    <input asp-for="DocumentoIdentificacion" type="text" class="form-control" placeholder="Ingresar DNI/NIE" id="idDocumento">
                     <span asp-validation-for="DocumentoIdentificacion" class="text-danger"></span>
                 </div>
 
@@ -62,13 +62,13 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="email">Telefono:</label>
-                    <input asp-for="Telefono" type="text" class="form-control" placeholder="Ingresar telefono">
+                    <label for="telefono">Telefono:</label>
+                    <input asp-for="Telefono" type="text" class="form-control" placeholder="Ingresar telefono" id="Idtelefono">
                     <span asp-validation-for="Telefono" class="text-danger"></span>
                 </div>
 
                 <div class="form-group">
-                    <label for="email">Pais residencia</label>
+                    <label for="paisResidencia">Pais residencia</label>
                     <input asp-for="PaisResidencia" type="text" class="form-control" placeholder="Pais residencia">
                     <span asp-validation-for="PaisResidencia" class="text-danger"></span>
                 </div>
@@ -82,7 +82,30 @@
                 <button type="submit" class="btn btn-primary">Guardar</button>
                 <a asp-controller="Home" asp-action="Index" class="btn btn-warning">Volver a la lista</a>
             </form>
+            <script>
+                document.getElementById('formularioCreacion').addEventListener('submit', function (event) {
+                    var documentoIdentificacion = document.getElementById('idDocumento').value;
+                    console.log(documentoIdentificacion);
 
+                    var regexDNI = /^[XYZ]?\d{7,8}[A-Z]$/i;
+                    var dniValue = documentoIdentificacion.trim().toUpperCase();
+
+
+                    if (!regexDNI.test(dniValue)) {
+                        alert('Por favor introduce un DNI/NIE autentico');
+                        event.preventDefault();
+                    }
+
+                    var numeroTelefono = document.getElementById('Idtelefono').value;
+                    var regex = /^\d{10}$/;
+
+                    if (!regex.test(numeroTelefono)) {
+                        alert('Por favor introduce un número de telefono valido');
+                        event.preventDefault();
+                    }
+
+                });
+            </script>
         </div>
     </div>
 </div>

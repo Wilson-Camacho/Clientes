@@ -8,7 +8,7 @@ namespace Clientes.Interface
         Task<bool> InsertCustomer(Cliente cliente);
         Task<bool> UpdateCustomer(Cliente cliente);
 
-        Task<bool> DeleteCustomer(int idCliente);
+        void DeleteCustomer(int idCliente);
         Task<Cliente> ViewDetailsCustomer(int IdCliente);
 
         Task<ClienteInteres> ViewInterests(int idCliente);
