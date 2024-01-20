@@ -29,7 +29,7 @@
                     <td>
                         <a class="btn btn-primary" asp-controller="Home" asp-action="UpdateCustomer" asp-route-idCliente="@cliente.IdCliente"><i class="bi bi-pencil"></i></a>
                         <a class="btn btn-primary" asp-controller="Home" asp-action="NewSettingsCustomer" asp-route-idCliente="@cliente.IdCliente"><i class="bi bi-envelope-plus-fill"></i></a>
-                        <button id="btnEliminar" onclick='eliminarContacto(@cliente.IdCliente, "@cliente.Nombre")' class="btn btn-primary"><i class="bi bi-person-x-fill"></i></button>
+                        <button id="btnEliminar" onclick='eliminarContacto(@cliente.IdCliente, "@cliente.Nombre")' class="btn btn-danger"><i class="bi bi-person-x-fill"></i></button>
                     </td>
                 </tr>
             }
