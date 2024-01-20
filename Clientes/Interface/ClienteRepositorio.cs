@@ -100,7 +100,21 @@ namespace Clientes.Interface
 
             var queryExpression = $"SELECT * FROM clientes WHERE idCliente = {IdCliente}";
 
-            return db.QueryFirstOrDefault<Cliente>(queryExpression, new { Id = IdCliente });
+            Cliente cliente = db.QueryAsync<Cliente>(queryExpression, new { }).Result.First();
+            
+            queryExpression = $"SELECT idInteres FROM clientes_interes WHERE idCliente = {IdCliente}";
+            List<int> result = db.QueryAsync<int>(queryExpression, new { }).Result.ToList();
+
+            if (result != null && result.Count > 0) {
+                cliente.ClienteInteres = new ClienteInteres();
+                queryExpression = @"SELECT * FROM intereses";
+
+                cliente.ClienteInteres.Intereses = db.QueryAsync<Interes>(queryExpression, new { }).Result.ToList();
+                cliente.ClienteInteres.Cliente = cliente;
+                cliente.ClienteInteres.SelectedOptions = result;
+            }
+
+            return cliente;
         }
 
         public async Task<bool> DeleteCustomer(int IdCliente)

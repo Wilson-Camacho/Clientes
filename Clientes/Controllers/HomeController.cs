@@ -21,13 +21,13 @@ namespace Clientes.Controllers
 
         public async Task<IActionResult> Index(int page = 1)
         {
-            Task<IEnumerable<Cliente>> usuarios = _cliente.GetAllCustomers();
+            List<Cliente> usuarios = _cliente.GetAllCustomers().Result.ToList();
             int PageSize = 5;
 
             var startIndex = (page - 1) * PageSize;
-            var items = usuarios.Result.ToList().Skip(startIndex).Take(PageSize).ToList();
+            var items = usuarios.Skip(startIndex).Take(PageSize).ToList();
 
-            var totalPages = (int) Math.Ceiling((double) usuarios.Result.ToList().Count / PageSize);
+            var totalPages = (int) Math.Ceiling((double) usuarios.Count / PageSize);
 
             ViewBag.TotalPages = totalPages;
             ViewBag.CurrentPage = page;

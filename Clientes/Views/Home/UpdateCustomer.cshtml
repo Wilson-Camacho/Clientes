@@ -74,7 +74,13 @@
                         <input asp-for="NombreEmpresa" type="text" class="form-control" placeholder="Nombre empresa">
                     </div>
                 }
-
+                @if (Model.ClienteInteres != null && Model.ClienteInteres.SelectedOptions.Count > 0)
+                {
+                    <div class="form-group">
+                        <label for="seleccionInteres">Si lo desea, seleccionar los intereses:</label>
+                        <select class="form-select" asp-for="ClienteInteres.SelectedOptions" asp-items="@(new SelectList(Model.ClienteInteres.Intereses, nameof(Interes.IdInteres), nameof(Interes.Descripcion)))" multiple="multiple"></select>
+                    </div>
+                }
                 <br />
 
                 <button type="submit" class="btn btn-primary">Guardar</button>
