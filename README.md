@@ -14,5 +14,5 @@ He añadido como columnas los datos que considero que son los más importantes.
 
 En este caso he optado por la edición del cliente como una vista de los detalles del cliente y ha su vez como una edición.
 
-![Alt text](Imagenes/ModificacionCliente.png "imagen modificación cliente")
+![Alt text](Imagenes/ModificaciónCliente.png "imagen modificación cliente")
 
