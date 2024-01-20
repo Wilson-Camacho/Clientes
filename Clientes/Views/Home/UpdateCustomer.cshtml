@@ -17,7 +17,27 @@
                         <label for="fecha">Genero: @Model.Genero</label>
                     </div>
                 }
+                @if (Model.CuentaTwitter != null)
+                {
+                    <div class="form-group">
+                        <label for="cuentaTwitter">Cuenta twitter: @Model.CuentaTwitter</label>
+                    </div>
+                }
 
+                @if (Model.NombreEmpresa != null)
+                {
+                    <div class="form-group">
+                        <label for="fecha">Nombre Empresa: @Model.NombreEmpresa </label>
+                    </div>
+                }
+                @if (Model.ClienteInteres != null && Model.ClienteInteres.SelectedOptions.Count > 0)
+                {
+                    <div class="form-group">
+                        <label for="seleccionInteres">Intereses del cliente:</label>
+                        <select class="form-select" asp-for="ClienteInteres.SelectedOptions" asp-items="@(new SelectList(Model.ClienteInteres.Intereses, nameof(Interes.IdInteres), nameof(Interes.Descripcion)))" multiple="multiple" disabled></select>
+                    </div>
+                }
+                
                 <div class="form-group">
                     <label for="nombre">Nombre:</label>
                     <input asp-for="Nombre" type="text" class="form-control" placeholder="Ingresar nombre">
@@ -58,31 +78,7 @@
                     <input asp-for="FechaNacimiento" type="date" class="form-control" placeholder="Fecha de nacimiento">
                     <span asp-validation-for="FechaNacimiento" class="text-danger"></span>
                 </div>
-
-                @if (Model.CuentaTwitter != null)
-                {
-                    <div class="form-group">
-                        <label for="fecha">Cuenta twitter:</label>
-                        <input asp-for="CuentaTwitter" type="text" class="form-control" placeholder="Cuenta twitter">
-                    </div>
-                }
-
-                @if (Model.NombreEmpresa != null)
-                {
-                    <div class="form-group">
-                        <label for="fecha">Nombre Empresa</label>
-                        <input asp-for="NombreEmpresa" type="text" class="form-control" placeholder="Nombre empresa">
-                    </div>
-                }
-                @if (Model.ClienteInteres != null && Model.ClienteInteres.SelectedOptions.Count > 0)
-                {
-                    <div class="form-group">
-                        <label for="seleccionInteres">Si lo desea, seleccionar los intereses:</label>
-                        <select class="form-select" asp-for="ClienteInteres.SelectedOptions" asp-items="@(new SelectList(Model.ClienteInteres.Intereses, nameof(Interes.IdInteres), nameof(Interes.Descripcion)))" multiple="multiple"></select>
-                    </div>
-                }
                 <br />
-
                 <button type="submit" class="btn btn-primary">Guardar</button>
                 <a asp-controller="Home" asp-action="Index" class="btn btn-warning">Volver a la lista</a>
             </form>
