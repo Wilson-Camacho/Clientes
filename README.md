@@ -7,4 +7,4 @@ Se mostrará como es la navegación y la solución al problema que se ha plantea
 Lista de clientes con paginación:
 
 
-![Alt text](Imagenes de readme/Index.png "imagen index")
+![Alt text](Imagenes/Index.png "imagen index")
